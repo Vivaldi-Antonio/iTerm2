@@ -125,6 +125,7 @@
 #import "SCPPath.h"
 #import "SearchResult.h"
 #import "SessionView.h"
+#import "TaskNotifier.h"
 #import "TerminalFile.h"
 #import "TmuxController.h"
 #import "TmuxControllerRegistry.h"
@@ -713,7 +714,7 @@ static const NSUInteger kMaxHosts = 100;
 
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(coprocessChanged)
-                                                     name:@"kCoprocessStatusChangeNotification"
+                                                     name:kCoprocessStatusChangeNotification
                                                    object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(sessionContentsChanged:)
