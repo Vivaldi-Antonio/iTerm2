@@ -74,7 +74,7 @@ NS_ASSUME_NONNULL_BEGIN
                                completion:(void (^ _Nullable)(BOOL))completion
                               environment:(NSDictionary * _Nonnull)environment
                                    isUTF8:(BOOL)isUTF8
-                         serverConnection:(iTermFileDescriptorServerConnection * _Nullable)serverConnection
+                         serverConnection:(iTermGeneralServerConnection * _Nullable)serverConnection
                             substitutions:(NSDictionary *)substitutions
                          windowController:(PseudoTerminal * _Nonnull)windowController
                               synchronous:(BOOL)synchronous {
