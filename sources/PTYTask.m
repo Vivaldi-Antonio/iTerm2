@@ -15,6 +15,7 @@
 #import "iTermLSOF.h"
 #import "iTermLegacyJobManager.h"
 #import "iTermMonoServerJobManager.h"
+#import "iTermMultiServerJobManager.h"
 #import "iTermOpenDirectory.h"
 #import "iTermOrphanServerAdopter.h"
 #import "NSDictionary+iTerm.h"
@@ -89,7 +90,11 @@ static void HandleSigChld(int n) {
         writeBuffer = [[NSMutableData alloc] init];
         writeLock = [[NSLock alloc] init];
         if ([iTermAdvancedSettingsModel runJobsInServers]) {
-            _jobManager = [[iTermMonoServerJobManager alloc] init];
+            if ([iTermAdvancedSettingsModel multiserver]) {
+                _jobManager = [[iTermMultiServerJobManager alloc] init];
+            } else {
+                _jobManager = [[iTermMonoServerJobManager alloc] init];
+            }
         } else {
             _jobManager = [[iTermLegacyJobManager alloc] init];
         }
@@ -249,7 +254,7 @@ static void HandleSigChld(int n) {
     DLog(@"launchWithPath:%@ args:%@ env:%@ grisSize:%@ isUTF8:%@ autologPath:%@ synchronous:%@",
          progpath, args, env, VT100GridSizeDescription(gridSize), @(isUTF8), autologPath, @(synchronous));
 
-    if ([iTermAdvancedSettingsModel runJobsInServers]) {
+    if ([iTermAdvancedSettingsModel runJobsInServers] && ![iTermAdvancedSettingsModel multiserver]) {
         // We want to run
         //   iTerm2 --server progpath args
         NSArray *updatedArgs = [@[ @"--server", progpath ] arrayByAddingObjectsFromArray:args];
