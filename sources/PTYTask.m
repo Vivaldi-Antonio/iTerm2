@@ -698,6 +698,7 @@ static void HandleSigChld(int n) {
     }
 }
 
+#warning TODO: Super sketchy that this completion block doesn't take a success/error status.
 - (void)reallyLaunchWithPath:(NSString *)progpath
                    arguments:(NSArray *)args
                  environment:(NSDictionary *)env
@@ -763,7 +764,6 @@ static void HandleSigChld(int n) {
          switch (status) {
              case iTermJobManagerForkAndExecStatusSuccess:
                  // Parent
-                 [self setTty:self->_jobManager.tty];
                  DLog(@"finished succesfully");
                  break;
 
@@ -778,6 +778,7 @@ static void HandleSigChld(int n) {
                  break;
 
              case iTermJobManagerForkAndExecStatusTaskDiedImmediately:
+             case iTermJobManagerForkAndExecStatusServerError:
                  [self->_delegate taskDiedImmediately];
                  break;
          }

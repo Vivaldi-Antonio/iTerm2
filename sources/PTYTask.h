@@ -36,7 +36,8 @@ typedef NS_ENUM(NSUInteger, iTermJobManagerForkAndExecStatus) {
     iTermJobManagerForkAndExecStatusSuccess,
     iTermJobManagerForkAndExecStatusTempFileError,
     iTermJobManagerForkAndExecStatusFailedToFork,
-    iTermJobManagerForkAndExecStatusTaskDiedImmediately
+    iTermJobManagerForkAndExecStatusTaskDiedImmediately,
+    iTermJobManagerForkAndExecStatusServerError
 };
 
 typedef NS_ENUM(NSUInteger, iTermJobManagerKillingMode) {
